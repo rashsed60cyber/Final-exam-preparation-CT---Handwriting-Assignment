@@ -1,14 +1,29 @@
-public class ArraySum {
-    static int calculateSum(int[] arr) {
-        int sum = 0;
-        for (int i = 0; i < arr.length; i++) {
-            sum += arr[i];
+import java.io.PrintWriter;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) throws Exception {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter numbers separated by comma:");
+        String data = sc.nextLine();
+        Scanner fileScanner = new Scanner(data);
+        fileScanner.useDelimiter(",");
+        int highest = Integer.MIN_VALUE;
+        int sumOfSeries = 0;
+        while (fileScanner.hasNextInt()) {
+            int num = fileScanner.nextInt();
+            sumOfSeries += num;
+            if (num > highest) {
+                highest = num;
+            }
         }
-        return sum;
-    }
-    public static void main(String[] args) {
-        int[] numbers = {10, 20, 30, 40, 50};
-        int result = calculateSum(numbers);
-        System.out.println("Sum of array elements: " + result);
+        fileScanner.close();
+        int naturalSum = highest * (highest + 1) / 2;
+        PrintWriter pw = new PrintWriter(System.out);
+        pw.println("Highest Number: " + highest);
+        pw.println("Sum of Given Numbers: " + sumOfSeries);
+        pw.println("Sum of Natural Numbers up to " + highest + ": " + naturalSum);
+        pw.flush();
+        pw.close();
+        sc.close();
     }
 }
